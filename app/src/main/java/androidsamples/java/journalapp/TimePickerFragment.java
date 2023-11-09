@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,10 @@ public class TimePickerFragment extends DialogFragment {
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     // TODO implement the method
-    return new TimePickerDialog(requireContext(), (tp, hm, m)->{}, 0, 0, false);
+    final Calendar c = Calendar.getInstance();
+    int hour = c.get(Calendar.HOUR_OF_DAY);
+    int minute = c.get(Calendar.MINUTE);
+
+    return new TimePickerDialog(requireContext(), (tp, hm, m)->{}, hour, minute, false);
   }
 }
