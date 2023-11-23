@@ -13,7 +13,11 @@
     <action
         android:id="@+id/addEntryAction"
         app:destination="@id/entryDetailsFragment" />
+    <action
+        android:id="@+id/action_entryListFragment_to_infoFragment"
+        app:destination="@id/infoFragment" />
   </fragment>
+
   <fragment
       android:id="@+id/entryDetailsFragment"
       android:name="androidsamples.java.journalapp.EntryDetailsFragment"
@@ -21,7 +25,7 @@
       tools:layout="@layout/fragment_entry_details">
     <argument
         android:name="entryId"
-        android:defaultValue='""'
+        android:defaultValue=""
         app:argType="string" />
     <action
         android:id="@+id/datePickerAction"
@@ -41,13 +45,56 @@
         android:name="selectedDate"
         app:argType="integer"
         android:defaultValue="0" />
+    <argument
+        android:name="selectedTitle"
+        app:argType="string"
+        android:defaultValue=""/>
+    <argument
+        android:name="selectedStartTimeHour"
+        app:argType="integer"
+        android:defaultValue="0" />
+    <argument
+        android:name="selectedStartTimeMinute"
+        app:argType="integer"
+        android:defaultValue="0" />
+    <argument
+        android:name="selectedEndTimeHour"
+        app:argType="integer"
+        android:defaultValue="0" />
+    <argument
+        android:name="selectedEndTimeMinute"
+        app:argType="integer"
+        android:defaultValue="0" />
+    <action
+        android:id="@+id/action_entryDetailsFragment_to_timePickerDialog"
+        app:destination="@id/timePickerDialog" />
+    <action
+        android:id="@+id/action_entryDetailsFragment_to_deleteFragment"
+        app:destination="@id/deleteFragment" />
   </fragment>
 
   <dialog
       android:id="@+id/datePickerDialog"
-      android:name="androidsamples.java.journalapp.DatePickerFragment" />
+      android:name="androidsamples.java.journalapp.DatePickerFragment" >
+    <action
+        android:id="@+id/action_datePickerDialog_to_entryDetailsFragment3"
+        app:destination="@id/entryDetailsFragment" />
+  </dialog>
 
   <dialog
       android:id="@+id/timePickerDialog"
-      android:name="androidsamples.java.journalapp.TimePickerFragment" />
+      android:name="androidsamples.java.journalapp.TimePickerFragment" >
+    <action
+        android:id="@+id/action_timePickerDialog_to_entryDetailsFragment3"
+        app:destination="@id/entryDetailsFragment" />
+  </dialog>
+  <dialog
+      android:id="@+id/infoFragment"
+      android:name="androidsamples.java.journalapp.InfoFragment"
+      android:label="InfoFragment" />
+  <dialog
+      android:id="@+id/deleteFragment"
+      android:name="androidsamples.java.journalapp.DeleteFragment"
+      android:label="DeleteFragment" />
+
 </navigation>

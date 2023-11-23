@@ -26,6 +26,7 @@
         android:layout_weight="0.6"
         android:padding="2dp"
         android:text="@string/date"
+        android:textColor="@color/dark_brown"
         android:textAllCaps="true"
         android:textStyle="italic" />
 
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
         android:text="@string/start_time"
+        android:textColor="@color/dark_brown"
         android:textStyle="italic" />
 
     <TextView
@@ -42,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
+        android:textColor="@color/dark_brown"
         android:text="@string/end_time"
         android:textStyle="italic" />
   </LinearLayout>

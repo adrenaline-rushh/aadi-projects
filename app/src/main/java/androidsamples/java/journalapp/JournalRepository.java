@@ -44,6 +44,10 @@ public class JournalRepository {
         mExecutor.execute(() -> mJournalEntryDao.update(entry));
     }
 
+    public void delete(JournalEntry entry) {
+        mExecutor.execute(() -> mJournalEntryDao.delete(entry));
+    }
+
     public LiveData<JournalEntry> getEntry(UUID id){
         return mJournalEntryDao.getEntry(id);
     }

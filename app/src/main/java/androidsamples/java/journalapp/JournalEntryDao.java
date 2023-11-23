@@ -2,6 +2,7 @@ package androidsamples.java.journalapp;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -22,4 +23,7 @@ public interface JournalEntryDao {
 
     @Update
     void update(JournalEntry entry);
+
+    @Delete
+    void delete(JournalEntry entry);
 }

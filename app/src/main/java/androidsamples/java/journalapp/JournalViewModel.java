@@ -19,4 +19,8 @@ public class JournalViewModel extends ViewModel {
     public void insert(JournalEntry entry){
         mRepository.insert(entry);
     }
+
+    public void delete(JournalEntry entry) {
+        mRepository.delete(entry);
+    }
 }
