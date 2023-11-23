@@ -9,5 +9,5 @@ The Journal app maintains a list of events the user wishes to keep track of. The
 
 ## Other Details
 
-It took approximately 15 hours to build this app, keeping all requirements in mind. Baibhav was responsible for coding, while Aaditya reviewed the code and made suggestions.
+It took approximately 25 hours to build this app, keeping all requirements in mind. Baibhav was responsible for coding, while Aaditya reviewed the code and made suggestions.
 In terms of difficulty, we would rate the assignment 9/10. The assignment demanded bringing a lot of concepts to use.
