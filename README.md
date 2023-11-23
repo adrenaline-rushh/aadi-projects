@@ -13,7 +13,7 @@ The Journal app maintains a list of events the user wishes to keep track of. The
    - Using this database, an entity has been defined. This entity represents a table. Each entry in the table represents a journal entry. The entity defines the ID (of type UUID), title (of type String), date (of type Date), start and end timings (of type Date) for each entry in the table.
    - Also, a DAO has been defined. In this DAO, functions to insert, update and delete data in the table have been defined. Queries to retrieve the entire table as well as retrieve single entries have also been defined.
      
-2. A repository has been created, with the same functions as the DAO mentioned above.. Executor class been used in this repository to execute all functions in the main thread. 
+2. A repository has been created, with the same functions as the DAO mentioned above. Executor class been used in this repository to execute all functions in the main thread. 
 3. In the nav graph, a Delete fragment has been added. In the AddEntryListAction fragment, 4 new arguments for passing start and end timings have been added.
 
 
