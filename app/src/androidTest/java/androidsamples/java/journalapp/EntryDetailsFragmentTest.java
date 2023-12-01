@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.espresso.accessibility.AccessibilityChecks;
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;
@@ -38,9 +40,13 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.runner.lifecycle.Stage.RESUMED;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.view.View;
 
 /**
@@ -59,6 +65,21 @@ public class EntryDetailsFragmentTest {
   @Rule
   public ActivityScenarioRule<MainActivity> activityScenario
           = new ActivityScenarioRule<>(MainActivity.class);
+
+  public static Activity getCurrentActivity() {
+    final Activity[] currentActivity = {null};
+    getInstrumentation().runOnMainSync(new Runnable() {
+      public void run() {
+        Collection<Activity> resumedActivities = ActivityLifecycleMonitorRegistry.getInstance()
+                .getActivitiesInStage(RESUMED);
+        if (resumedActivities.iterator().hasNext()) {
+          currentActivity[0] = (Activity) resumedActivities.iterator().next();
+        }
+      }
+    });
+    return currentActivity[0];
+  }
+
 
   @Test
   public void testNavigationToEntryListFragment() {
@@ -182,5 +203,37 @@ public class EntryDetailsFragmentTest {
   public void test_info_button(){
     onView(withId(R.id.info_item)).perform(click());
     onView(withText("OKAY")).perform(click());
+  }
+
+  @Test
+  public void check_orientation_change(){
+    onView(withId(R.id.btn_add_entry)).perform(click());
+    onView(withId(R.id.edit_title)).perform(clearText(), typeText("test1"), closeSoftKeyboard());
+    String s1 = getCurrentActivity().getString(R.id.edit_title);
+
+    getCurrentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    String s2 = getCurrentActivity().getString(R.id.edit_title);
+
+    assertThat(s2, equals(s1));
+    getCurrentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+    onView(withId(R.id.btn_entry_date)).perform(click());
+    onView(withText("OK")).perform(click());
+    String date1 = getCurrentActivity().getString(R.id.btn_entry_date);
+    getCurrentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    String date2 = getCurrentActivity().getString(R.id.btn_entry_date);
+    assertThat(date2, equals(date1));
+
+    onView(withId(R.id.btn_start_time)).perform(click());
+    onView(withText("OK")).perform(click());
+
+    onView(withId(R.id.btn_end_time)).perform(click());
+    onView(withText("OK")).perform(click());
+
+    onView(withId(R.id.btn_save)).perform(click());
+
+    onView(withText("test1")).perform(click());
+
+
   }
 }
