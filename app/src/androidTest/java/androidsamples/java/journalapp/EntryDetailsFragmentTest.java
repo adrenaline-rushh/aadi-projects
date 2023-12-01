@@ -234,7 +234,8 @@ public class EntryDetailsFragmentTest {
     onView(withId(R.id.btn_save)).perform(click());
 
     onView(withText("test1")).perform(click());
-
+    onView(withId(R.id.delete_item)).perform(click());
+    onView(withText("YES")).perform(click());
 
   }
 }
