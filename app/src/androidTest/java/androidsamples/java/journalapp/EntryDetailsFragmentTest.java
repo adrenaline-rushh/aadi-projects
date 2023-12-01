@@ -42,6 +42,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static androidx.test.runner.lifecycle.Stage.RESUMED;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -214,7 +215,7 @@ public class EntryDetailsFragmentTest {
     getCurrentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     String s2 = getCurrentActivity().getString(R.id.edit_title);
 
-    assertThat(s2, equals(s1));
+    assertThat(s2, equalTo(s1));
     getCurrentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
     onView(withId(R.id.btn_entry_date)).perform(click());
@@ -222,7 +223,7 @@ public class EntryDetailsFragmentTest {
     String date1 = getCurrentActivity().getString(R.id.btn_entry_date);
     getCurrentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     String date2 = getCurrentActivity().getString(R.id.btn_entry_date);
-    assertThat(date2, equals(date1));
+    assertThat(date2, equalTo(date1));
 
     onView(withId(R.id.btn_start_time)).perform(click());
     onView(withText("OK")).perform(click());
