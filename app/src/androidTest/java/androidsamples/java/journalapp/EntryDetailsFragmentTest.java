@@ -90,9 +90,24 @@ public class EntryDetailsFragmentTest {
 
   @Test
   public void testForCreatingANewTask(){
+    onView(withId(R.id.btn_add_entry)).perform(click());
+    onView(withId(R.id.edit_title)).perform(clearText(), typeText("test1"), closeSoftKeyboard());
+    onView(withId(R.id.btn_entry_date)).perform(click());
+    onView(withText("OK")).perform(click());
+    onView(withId(R.id.btn_start_time)).perform(click());
+    onView(withText("OK")).perform(click());
+
+    onView(withId(R.id.btn_end_time)).perform(click());
+    onView(withText("OK")).perform(click());
+
+    onView(withId(R.id.btn_save)).perform(click());
+
     onView(withText("test1")).perform(click());
 
     onView(withId(R.id.edit_title)).check(matches(withText("test1")));
+
+    onView(withId(R.id.delete_item)).perform(click());
+    onView(withText("YES")).perform(click());
 
 //    onView(withId(R.id.recyclerView)).perform(actionOnItemAtPosition(ITEM_IN_TEST, click()));
 
@@ -100,11 +115,28 @@ public class EntryDetailsFragmentTest {
 
   @Test
   public void testForCheckingOnBackPressed(){
+    onView(withId(R.id.btn_add_entry)).perform(click());
+    onView(withId(R.id.edit_title)).perform(clearText(), typeText("test1"), closeSoftKeyboard());
+    onView(withId(R.id.btn_entry_date)).perform(click());
+    onView(withText("OK")).perform(click());
+    onView(withId(R.id.btn_start_time)).perform(click());
+    onView(withText("OK")).perform(click());
+
+    onView(withId(R.id.btn_end_time)).perform(click());
+    onView(withText("OK")).perform(click());
+
+    onView(withId(R.id.btn_save)).perform(click());
+
     onView(withText("test1")).perform(click());
 
     onView(isRoot()).perform(ViewActions.pressBack());
 
     onView(withId(R.id.recyclerView)).check(matches(isDisplayed()));
+
+    onView(withText("test1")).perform(click());
+    onView(withId(R.id.delete_item)).perform(click());
+    onView(withText("YES")).perform(click());
+
   }
 
   @Test
